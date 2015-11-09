@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/demoapp
+permissions:
+  - object: /var/www/demoapp
+    owner: ec2-user
+permissions:
+  - object: /var/www/demoapp/scripts/*
+    owner: ec2-user
+    mode: 774
+hooks:
+  AfterInstall:
+    - location: scripts/builddocker.sh
+      runas: ec2-user

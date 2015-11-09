@@ -1,0 +1,51 @@
+
+<h3>Cluster</h3>
+<div class='stage'>
+<h4><%=@cluster.cluster_name%> <small>Status: <%=@cluster.status%></small></h4>
+  # of Instances: <%=@cluster.registered_container_instances_count%><br>
+  Running Tasks: <%=@cluster.running_tasks_count%><br>
+  Pending Tasks: <%=@cluster.pending_tasks_count%><br>
+  Active Services:  <%=@cluster.active_services_count%><br>
+</div>
+
+<h3>Cloud Formation Stack</h3>
+<div class='stage'>
+<h4><%=@stack.stack_name%> <small>Status: <%=@stack.stack_status%></small></h4>
+  <%=@stack.description%><br>
+  <%=@stack.last_updated_time ? @stack.last_updated_time : @stack.creation_time%>
+</div>
+
+<h3>CodeDeploy</h3>
+<div class='stage'>
+<h4><%=@codedeploy.deployment_group_name%> <small>Config Group: <%=@codedeploy.deployment_config_name%></small></h4>
+  EC2 Key: <%=@codedeploy.ec2_tag_filters.first.key%> | EC2 Value: <%=@codedeploy.ec2_tag_filters.first.value%>
+</div>
+
+<h3><%=@resp.pipeline_name%></h3>
+<%@resp.stage_states.each do |stage|%>
+  <div class='stage'>
+    <h3><%=stage.stage_name%></h3>
+    <%=stage.inbound_transition_state%> |<br>
+    <%stage.action_states.each do |action|%>
+      <%=action.action_name%> |<br>
+      Rev: <%=action.current_revision%> |<br>
+      <%if action.latest_execution%>
+        <h4><%=action.latest_execution.status%></h4>
+        <%@jobs = true if action.latest_execution.status == 'InProgress'%>
+      <%end%>
+      Execution: <%=action.latest_execution%> |<br>
+      <%=action.entity_url%> |<br>
+      <%=action.revision_url%><br>
+    <%end%><br>
+  </div>
+<%end%>
+
+<br><br><br><br>
+<%if @jobs%>
+  Jobs Pending
+  <%=Job.build_spec%>
+<%end%>
+
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>

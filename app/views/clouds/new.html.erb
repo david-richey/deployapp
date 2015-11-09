@@ -1,0 +1,50 @@
+<%=form_tag create_cloud_path, method: :get do%>
+  <div class='form-section'>
+    <div class='form-image' style='height:75px'><i class="fa fa-cloud fa-5x" style='color:lightblue'></i></div>
+    <div class='form-forms'>
+      Cloud Name:
+      <%= text_field_tag :cloud_name, '', class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-section'>
+    <div class='form-image'><%=image_tag '/ecs.jpg'%></div>
+    <div class='form-forms'>
+    Cluster Name:
+    <%= text_field_tag :cluster_name, '', class: 'form-control' %>
+    Docker Hub:
+    <%= text_field_tag :docker_hub, 'davidrichey/baseruby', class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-section'>
+    <div class='form-image'><%=image_tag '/ec2.jpg'%></div>
+    <div class='form-forms'>
+    EC2 Instance Keypair:
+    <%= text_field_tag :key_pair, 'davidrichey', class: 'form-control' %>
+    Number Of Instances:
+    <%= number_field_tag :number_of_instances, '1', class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-section'>
+    <div class='form-image'><%=image_tag '/codepipeline.jpg'%></div>
+    <div class='form-forms'>
+    Pipeline Name
+    <%= text_field_tag :codepipeline_name, '', class: 'form-control' %>
+    CodePipeline GitHub Owner
+    <%= text_field_tag :codepipeline_github_owner, 'david-richey', class: 'form-control' %>
+    CodePipeline GitHub Repo
+    <%= text_field_tag :codepipeline_repo, 'demoapp', class: 'form-control' %>
+    </div>
+  </div>
+
+<h3>CodeDeploy</h3>
+<div class='stage'>
+<h4><%=@codedeploy.deployment_group_name%> <small>Config Group: <%=@codedeploy.deployment_config_name%></small></h4>
+  EC2 Key: <%=@codedeploy.ec2_tag_filters.first.key%> | EC2 Value: <%=@codedeploy.ec2_tag_filters.first.value%>
+</div>
+
+  <br><br>
+  <%=submit_tag 'Create', class: 'btn btn-primary btn-lg'%>
+<%end%>

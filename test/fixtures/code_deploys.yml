@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  config_name: MyString
+  app_name: MyString
+  group_name: MyString
+  key: MyString
+  value: MyString
+  cloud_id: 
+
+two:
+  config_name: MyString
+  app_name: MyString
+  group_name: MyString
+  key: MyString
+  value: MyString
+  cloud_id: 

@@ -1,0 +1,50 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'bootstrap';
+
+
+.stage{
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  padding:10px 20px;
+  margin: 5px 10px;
+}
+.stage.InProgress{
+  border: 2px solid orange;
+}
+.stage.Succeeded{
+  border: 2px solid green;
+}
+.stage.Failed{
+  border: 2px solid red;
+}
+
+.instance{
+  border: 2px solid lightgray;
+  position: relative;
+  padding:10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+
+
+.form-section{
+  border: 2px solid lightgray;
+  margin: 5px 0px;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+.form-image{
+  width:100px;
+  height:100px;
+  display: inline-block;
+}
+.form-forms{
+  display: inline-block;
+  width:85%;
+  vertical-align: top
+}

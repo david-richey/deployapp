@@ -1,0 +1,10 @@
+class CreateInstances < ActiveRecord::Migration
+  def change
+    create_table :instances do |t|
+      t.string :ids
+      t.references :cloud, index: true, foreign_key: true
+
+      t.timestamps null: false
+    end
+  end
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  hub: MyString
+  cloud_id: 
+
+two:
+  name: MyString
+  hub: MyString
+  cloud_id: 

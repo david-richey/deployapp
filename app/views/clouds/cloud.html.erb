@@ -1,0 +1,68 @@
+<%if @cloud.ecs_cluster%>
+  <h3>Cluster</h3>
+  <div class='stage'>
+  <h4><%=@cluster.cluster_name%> <small>Status: <%=@cluster.status%></small></h4>
+    # of Instances: <%=@cluster.registered_container_instances_count%><br>
+    Tasks
+    <div class='badging'>
+      Pending: <%=@cluster.pending_tasks_count%><br>
+    </div>
+    <div class='badging'>
+      Running: <%=@cluster.running_tasks_count%>
+    </div>
+    Active Services:  <%=@cluster.active_services_count%><br>
+    ARN: <%=@cluster.cluster_arn%><br>
+  </div>
+<%end%>
+
+<%if @cloud.instance%>
+  <h4>Instances <small><%=@instances.count%></small></h4>
+  <div class='stage'>
+    <%@instances.each do |instance|%>
+      <div class='instance'>
+        <%=instance.state.name%><br>
+        <%=instance.instance_id%><br>
+        <%=instance.public_dns_name%><br>
+        <%=instance.instance_type%><br>
+        <%=instance.security_groups.map{|s| s.group_name}%><br>
+        <%=instance.iam_instance_profile.arn%><br>
+      </div>
+    <%end%>
+  </div>
+<%end%>
+
+<%if @cloud.code_pipeline%>
+  <h3><%=@resp.pipeline_name%></h3>
+  <%=link_to 'Deploy', deploy_cloud_path, class: 'btn btn-success', data: {confirm: "Are you sure you want to deploy?"}%>
+  <%@resp.stage_states.each do |stage|%>
+    <%@status = stage.action_states.last.latest_execution ? stage.action_states.last.latest_execution.status : 'Not ran'%>
+    <div class='stage <%=@jobs ? 'Waiting' : @status%>'>
+      <h3><%=stage.stage_name%></h3>
+      <%=stage.inbound_transition_state%> |<br>
+      <%stage.action_states.each do |action|%>
+        <%=action.action_name%> |<br>
+        Rev: <%=action.current_revision%> |<br>
+        <%if @jobs%>
+          <h4>Waiting</h4>
+        <%else%>
+          <%if action.latest_execution%>
+            <h4><%=action.latest_execution.status%></h4>
+            <%@jobs = true if action.latest_execution.status == 'InProgress'%>
+            <%@job_name ||= action.action_name if action.latest_execution.status == 'InProgress'%>
+          <%end%>
+        <%end%>
+        Execution: <%=action.latest_execution%> |<br>
+      <%end%><br>
+    </div>
+  <%end%>
+<%end%>
+
+<br><br><br><br>
+<%if @jobs%>
+  <%=@job_name%> Pending
+<%end%>
+
+<br><br><br><br>
+<%=link_to 'Destroy', destroy_cloud_path(id: @cloud.id), class: 'btn btn-danger', data: {confirm: 'Are you sure?'}%>
+<br><br><br><br>
+<br><br><br><br>

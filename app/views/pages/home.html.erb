@@ -1,0 +1,10 @@
+<%@clouds.each do |cloud|%>
+  <div class='cloud'>
+    <h3><%=cloud.name%></h3>
+    <%=link_to 'View', cloud_path(id:cloud.id)%>
+  </div>
+<%end%>
+<%i=0%>
+<br><br><br>
+<%=link_to 'Build New Stack', new_cloud_path, class: 'btn btn-primary', data: { confirm: 'Are you sure? This will create a new insatnce' }%>
+<%count=0%>

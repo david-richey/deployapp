@@ -1,0 +1,9 @@
+<%@resp.reservations.each do |res|%>
+  <%res.instances.each do |instance|%>
+    <%=instance.instance_id%><br>
+    <%=instance.state.name%><br>
+    <%=instance.public_dns_name%><br>
+    Keypair: <%=instance.key_name%><br>
+    <%=instance.instance_type%><br>
+  <%end%>
+<%end%>
