@@ -30,7 +30,7 @@ module Aws
                   run_order: 1,
                   configuration: {
                     "Branch" => "master",
-                    "OAuthToken" => "fdeaf4f7d3d010bbd3a3b946a5d363d82b529c63",
+                    "OAuthToken" => ENV["OAUTHTOKEN"],
                     "Owner" => github_owner,
                     "Repo" => repo
                   },
