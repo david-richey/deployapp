@@ -7,3 +7,15 @@
 
 
 ### Run
+```
+git clone git@github.com:david-richey/deployapp.git
+cd deployapp
+bundle install
+# Process to start
+
+# 1. boot rails server
+rails s
+# 2. ngrok for hooks from web
+nrgok 3000
+# 3. start sidekiq
+bundle exec sidekiq
